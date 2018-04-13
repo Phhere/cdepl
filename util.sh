@@ -132,14 +132,14 @@ util_print_calltrace()
 _util_check_bash_version()
 {
 	if [ "$(echo $SHELL | grep "bash")" = "" ] ; then
-		util_error_and_exit "Current shell not supported by deploy script, bash only"
+		util_log_error_and_exit "Current shell not supported by deploy script, bash only"
 	fi
 
 	# Some features like "declare -A" require version 4
 	if [ $(echo ${BASH_VERSION%%[^0-9]*}) -lt 4 ]; then
 		read versionCheck <<< $(echo ${BASH_VERSION%%[^0-9]* } | awk -F '.' '{split($3, a, "("); print a[1]; print ($1 >= 3 && $2 > 2) ? "YES" : ($2 == 2 && a[1] >= 57) ? "YES" : "NO" }')
 		if [ "$versionCheck" == "NO" ]; then
-			util_error_and_exit "Bash version >= 3.2.57 required (Recommended is version 4)"
+			util_log_error_and_exit "Bash version >= 3.2.57 required (Recommended is version 4)"
 		fi
 	fi
 }
