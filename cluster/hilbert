@@ -490,6 +490,13 @@ _cdepl_cluster_after_cleanup()
 	__cdepl_cluster_login_cmd "qdel $__HILBERT_JOB_ID" > /dev/null 2>&1
 }
 
+cdepl_cluster_login_cmd()
+{
+	local cmd="$1"
+	local required_env=""
+	__cdepl_cluster_login_cmd "$cmd" "$required_env"
+}
+
 __cdepl_cluster_login_cmd()
 {
 	local cmd="$1"

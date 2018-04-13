@@ -526,6 +526,12 @@ __cdepl_cluster_hhubs_download_from_sollipulli()
 	# within 60 seconds
 	scp $recursive -o ControlMaster=auto -o ControlPath=~/.ssh/cdepl_%r@%h:%p.sock -o ControlPersist=60 $port $dest $local_path > /dev/null 2>&1
 }
+cdepl_cluster_login_cmd()
+{
+	local cmd="$1"
+	local required_env="$2"
+	__cdepl_cluster_hhubs_remote_sollipulli_cmd 0 "$cmd"
+}
 
 __cdepl_cluster_hhubs_remote_sollipulli_cmd()
 {
